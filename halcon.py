@@ -396,11 +396,11 @@ def mensaje_principal(modelos, est, rapida, segura, momento, calientes=None):
         nuevas = [c for c in segura['zonas'] if c not in rapida['zonas']]
         via = COMUNAS[nuevas[0]]['nombre'] if nuevas else COMUNAS[segura['zonas'][1]]['nombre']
         extra = segura['minutos'] - rapida['minutos']
-        tiempo = f'Te toma {extra} minuto{"s" if extra != 1 else ""} más' if extra > 0 else 'Llegas casi en el mismo tiempo'
+        tiempo = (f'Por {via} tardas {extra} minuto{"s" if extra != 1 else ""} más' if extra > 0
+                  else f'Por {via} llegas casi en el mismo tiempo')
         return {'tipo': 'desvio', 'titulo': f'Te sugerimos desviar por {via}',
                 'texto': f'En tu ruta habitual, el riesgo al pasar por {COMUNAS[paso]["nombre"]}{barrios_paso} '
-                         f'{verbo_paso} {rapida["riesgo_paso"]:.0f}%{por_paso}. {tiempo}, y lo más complicado '
-                         f'que cruzas baja a {segura["riesgo_paso"]:.0f}%.'}
+                         f'{verbo_paso} {rapida["riesgo_paso"]:.0f}%{por_paso}. {tiempo} y esquivas esa zona.'}
     if rapida['riesgo'] >= UMBRALES['alto'] and peor in (rapida['zonas'][0], rapida['zonas'][-1]):
         donde = 'tu punto de salida' if peor == rapida['zonas'][0] else 'tu destino'
         return {'tipo': 'alerta', 'titulo': f'Lo más delicado es {donde}, {nombre}',
@@ -426,7 +426,7 @@ def consejos(est, ruta, modo, lluvia_mm, calientes=None, momento=None):
     if calientes and momento is not None:
         top = calientes.get(f'{ruta["peor_zona"]}-{franja_de(momento.hour)}', [])[:1]
         if top:
-            lugar = f'{top[0]} ({f["zona"]})'
+            lugar = top[0] if top[0] == f['zona'] else f'{top[0]} ({f["zona"]})'
     if f['incidente'] == 'hurto':
         lista.append(f'Guarda el celular antes de llegar a {lugar} y no lo saques en los semáforos.'
                      if modo != 'carro' else f'En {lugar} sube los vidrios y deja el celular fuera de la vista.')

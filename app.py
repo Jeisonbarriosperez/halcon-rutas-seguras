@@ -29,7 +29,7 @@ ZONA_HORARIA = ZoneInfo('America/Bogota')
 
 st.set_page_config(page_title='Halcón · rutas tranquilas en Bucaramanga',
                    page_icon=str(CARPETA / 'recursos' / 'halcon.png'), layout='wide')
-st.logo(str(CARPETA / 'recursos' / 'marca.png'), size='large', icon_image=str(CARPETA / 'recursos' / 'halcon.png'))
+st.logo(str(CARPETA / 'recursos' / 'marca.png'), size='large')
 
 TINTA, PAPEL, CARTA, LINEA, TENUE = '#1C1B19', '#F5F1E8', '#FFFDF8', '#E3DCCB', '#6B655A'
 MARCA, OCRE = '#1F4E5F', '#C47F2C'
@@ -47,19 +47,21 @@ TIPOS_REPORTE = {
 ICONO_REPORTE = {'alumbrado': 'lightbulb', 'robo': 'front_hand', 'accidente': 'car_crash', 'bloqueo': 'block',
                  'rina': 'groups', 'sospechoso': 'visibility'}
 
-LUGARES = {f'{b["barrio"]} · {COMUNAS[b["comuna_id"]]["nombre"]}': b
-           for b in sorted(BARRIOS, key=lambda b: b['barrio'])} if COMUNAS else {}
+def _etiqueta_lugar(b):
+    comuna = COMUNAS[b['comuna_id']]['nombre']
+    return b['barrio'] if b['barrio'] == comuna else f'{b["barrio"]} · {comuna}'
+
+
+LUGARES = {_etiqueta_lugar(b): b for b in sorted(BARRIOS, key=lambda b: b['barrio'])} if COMUNAS else {}
 NOMBRES_LUGARES = list(LUGARES)
 COORD_BARRIO = {b['barrio']: (b['lat'], b['lon']) for b in BARRIOS}
 
 # ---------------------------------------------------------------- ESTILO
-st.markdown("""
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0">
-<style>
+CSS = """@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0');
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Public+Sans:wght@400;500;600;700&display=swap');
 html, body, .stApp, .stMarkdown, p, li, label, input, textarea, button { font-family:'Public Sans', sans-serif !important; }
 h1, h2, h3, .serif { font-family:'Fraunces', Georgia, serif !important; letter-spacing:-0.01em; }
-.block-container { max-width:1180px; padding-bottom:3rem; }
+.block-container { max-width:1180px; padding-top:4.2rem; padding-bottom:3rem; }
 .material-symbols-outlined { font-size:1.15em; vertical-align:-0.2em; }
 [data-testid="stHeader"] { background:rgba(245,241,232,0.96); border-bottom:1px solid #E3DCCB; }
 
@@ -127,8 +129,11 @@ h1, h2, h3, .serif { font-family:'Fraunces', Georgia, serif !important; letter-s
 .pie { margin-top:40px; padding-top:14px; border-top:1px solid #E3DCCB; color:#8A8378; font-size:0.8rem; line-height:1.5; }
 div[data-testid="stVerticalBlockBorderWrapper"] { border-radius:14px; }
 .stButton button, .stDownloadButton button, .stLinkButton a, .stFormSubmitButton button { border-radius:10px; font-weight:600; }
-</style>
-""", unsafe_allow_html=True)
+"""
+# Los estilos van en un solo bloque <style> sin líneas en blanco: en Markdown, una línea en blanco
+# cortaría el bloque y el resto del CSS aparecería como texto en la página.
+st.markdown('<style>' + ' '.join(linea.strip() for linea in CSS.splitlines() if linea.strip()) + '</style>',
+            unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------- PIEZAS DE INTERFAZ
@@ -417,7 +422,7 @@ def pagina_inicio():
 
     promedio = est['riesgo'].mean()
     n_alto = int((est['nivel'] == 'Alto').sum())
-    seccion('Así está la ciudad ahora', f'{franja_texto(franja_de(momento.hour)).capitalize()}.')
+    seccion('Así está la ciudad ahora', franja_texto(franja_de(momento.hour)).capitalize())
     k1, k2, k3 = st.columns(3)
     dato(k1, PALABRA_NIVEL[nivel_de(promedio)], f'Nivel general de la ciudad ({promedio:.0f}% en promedio)',
          COLOR_NIVEL[nivel_de(promedio)])
@@ -459,7 +464,7 @@ def pagina_ruta():
     def indice(nombre, respaldo):
         if nombre in NOMBRES_LUGARES:
             return NOMBRES_LUGARES.index(nombre)
-        return next((i for i, n in enumerate(NOMBRES_LUGARES) if n.startswith(respaldo + ' ·')), 0)
+        return next((i for i, n in enumerate(NOMBRES_LUGARES) if n == respaldo or n.startswith(respaldo + ' ·')), 0)
 
     html('<div class="titular chico">¿Para dónde vas?</div>')
     with st.container(border=True):
@@ -483,12 +488,15 @@ def pagina_ruta():
 
     o_b, d_b = LUGARES[origen], LUGARES[destino]
     o, d = o_b['comuna_id'], d_b['comuna_id']
-    lluvia, previa, temp = clima_en(salida, escenario)
-    reportes, fallas, _ = comunidad(salida)
-    est = estado(salida, lluvia, previa, temp, reportes, fallas)
-    rapida, segura = calcular_rutas(est, o, d, modo, franja_de(salida.hour))
-    msg = mensaje_principal(modelos, est, rapida, segura, salida, calientes())
-    hay_desvio = segura is not rapida
+    with st.spinner('Calculando tu ruta…'):
+        lluvia, previa, temp = clima_en(salida, escenario)
+        reportes, fallas, _ = comunidad(salida)
+        est = estado(salida, lluvia, previa, temp, reportes, fallas)
+        rapida, segura = calcular_rutas(est, o, d, modo, franja_de(salida.hour))
+        msg = mensaje_principal(modelos, est, rapida, segura, salida, calientes())
+        hay_desvio = segura is not rapida
+        geo_r = calles_reales(rapida['zonas'], modo) if len(rapida['zonas']) > 1 else None
+        geo_s = calles_reales(segura['zonas'], modo) if hay_desvio else geo_r
 
     # ---- el veredicto
     final = segura if hay_desvio else rapida
@@ -498,8 +506,6 @@ def pagina_ruta():
          f'<div class="niv">{PALABRA_NIVEL[nivel]}</div></div>'
          f'<div><h3>{msg["titulo"]}</h3><p>{msg["texto"]}</p></div></div>')
 
-    geo_r = calles_reales(rapida['zonas'], modo) if len(rapida['zonas']) > 1 else None
-    geo_s = calles_reales(segura['zonas'], modo) if hay_desvio else geo_r
     tarjetas = [(rapida, geo_r, 'Ruta habitual · la más corta' if hay_desvio else 'Tu ruta', '')]
     if hay_desvio:
         tarjetas.append((segura, geo_s, 'Ruta sugerida por Halcón', 'sugerida'))
@@ -607,9 +613,12 @@ def pagina_mapa():
 
     otro = 'Sin lluvia' if mm >= 0.5 else 'Lluvia'
     alterno = estado(elegido, ESCENARIOS_LLUVIA[otro], ESCENARIOS_LLUVIA[otro] * 0.5)
-    html(f'<div class="aviso">{icono("rainy")} {"Si no lloviera" if otro == "Sin lluvia" else "Si llueve"}, el riesgo '
-         f'promedio pasaría de {est["riesgo"].mean():.0f}% a {alterno["riesgo"].mean():.0f}%. En los datos reales, '
-         f'con lluvia hay menos gente en la calle: bajan algunos robos, pero suben los accidentes.</div>')
+    actual_p, otro_p = est['riesgo'].mean(), alterno['riesgo'].mean()
+    si = 'Si no lloviera' if otro == 'Sin lluvia' else 'Si llueve'
+    cambio = (f'el riesgo promedio pasaría de {actual_p:.0f}% a {otro_p:.0f}%' if abs(otro_p - actual_p) >= 1
+              else 'el riesgo casi no cambiaría a esta hora')
+    html(f'<div class="aviso">{icono("rainy")} {si}, {cambio}. En los datos reales, con lluvia hay menos gente en la '
+         f'calle: bajan algunos robos, pero suben los accidentes.</div>')
 
     with st.expander('Ver el día completo (todas las comunas, todas las horas)'):
         dia = riesgo_del_dia(fecha, mm)
