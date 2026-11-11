@@ -1,0 +1,19 @@
+# Credenciales (nunca a GitHub)
+.streamlit/secrets.toml
+.env
+
+# Entorno de Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Datos descargados y procesados (se regeneran con 1_descargar_datos.py y viven en Azure SQL)
+datos/
+
+# Editores y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

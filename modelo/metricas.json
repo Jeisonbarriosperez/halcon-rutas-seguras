@@ -1,0 +1,1173 @@
+{
+ "mejor": "Gradient Boosting",
+ "fecha": "10/11/2026 20:46",
+ "origen": "Azure SQL",
+ "incidentes": 80467,
+ "incidentes_con_hora": 79475,
+ "filas": 521424,
+ "entrenamiento": 447168,
+ "prueba": 74256,
+ "periodo": [
+  "01/01/2016",
+  "30/06/2026"
+ ],
+ "distribucion": {
+  "Bajo": 453508,
+  "Medio": 58057,
+  "Alto": 9859
+ },
+ "umbrales": [
+  12.0,
+  33.0
+ ],
+ "resultados": {
+  "Regresión Logística": {
+   "AUC": 74.94679602273516,
+   "AUC_alguno": 72.57785655920446,
+   "Exactitud": 88.69855634561516,
+   "F1": 31.37324089966709,
+   "segundos": 7.5
+  },
+  "Random Forest": {
+   "AUC": 76.27251471266305,
+   "AUC_alguno": 73.69622248355037,
+   "Exactitud": 88.70394311570782,
+   "F1": 31.337957808797924,
+   "segundos": 50.4
+  },
+  "Gradient Boosting": {
+   "AUC": 76.55793644124316,
+   "AUC_alguno": 73.98702342836857,
+   "Exactitud": 88.70394311570782,
+   "F1": 31.337957808797924,
+   "segundos": 18.6,
+   "matriz": [
+    [
+     41595,
+     18025,
+     6248
+    ],
+    [
+     2129,
+     3019,
+     2254
+    ],
+    [
+     101,
+     347,
+     538
+    ]
+   ],
+   "detecta_alto": 54.563894523326574,
+   "siempre_bajo": 88.70394311570782,
+   "calibracion": {
+    "dijo": [
+     3.9,
+     4.9,
+     5.8,
+     6.8,
+     8.4,
+     10.8,
+     14.3,
+     19.4,
+     29.0,
+     41.5
+    ],
+    "paso": [
+     3.4,
+     3.9,
+     4.1,
+     5.0,
+     5.9,
+     8.6,
+     10.8,
+     16.1,
+     23.0,
+     32.1
+    ]
+   },
+   "incidentes_en_alto": 36.113148245154534,
+   "tiempo_alto": 12.174100409394526,
+   "tiempo_medio_alto": 40.98120017237664,
+   "incidentes_en_medio_alto": 75.53693033001572,
+   "primera_con_incidente": 29.235347985347985,
+   "cualquiera_con_incidente": 11.29605688429218
+  }
+ },
+ "importancia": {
+  "pct_subsidiado": 49.15,
+  "comuna_id": 38.81,
+  "franja": 7.01,
+  "dia_semana": 4.1,
+  "es_festivo": 0.46,
+  "mes": 0.22,
+  "temperatura": 0.13,
+  "es_puente": 0.05,
+  "lluvia_mm": 0.04,
+  "lluvia_previa_mm": 0.03,
+  "anio": 0.0,
+  "es_quincena": 0.0,
+  "confinamiento": 0.0
+ },
+ "tipo": {
+  "casos": {
+   "hurto": 62488,
+   "violencia": 14861,
+   "accidente": 2126
+  }
+ },
+ "reales": {
+  "hora_dia": [
+   [
+    207,
+    300,
+    313,
+    238,
+    217,
+    281,
+    316,
+    446,
+    532,
+    510,
+    664,
+    602,
+    454,
+    488,
+    497,
+    533,
+    520,
+    511,
+    623,
+    641,
+    610,
+    443,
+    307,
+    229
+   ],
+   [
+    179,
+    243,
+    219,
+    187,
+    211,
+    278,
+    330,
+    487,
+    550,
+    566,
+    745,
+    727,
+    522,
+    495,
+    497,
+    573,
+    612,
+    589,
+    787,
+    834,
+    678,
+    489,
+    310,
+    233
+   ],
+   [
+    194,
+    218,
+    193,
+    206,
+    174,
+    250,
+    321,
+    462,
+    567,
+    599,
+    752,
+    685,
+    488,
+    491,
+    492,
+    544,
+    599,
+    625,
+    735,
+    773,
+    671,
+    468,
+    352,
+    267
+   ],
+   [
+    168,
+    276,
+    253,
+    209,
+    205,
+    272,
+    314,
+    467,
+    523,
+    590,
+    675,
+    723,
+    468,
+    470,
+    477,
+    510,
+    544,
+    609,
+    720,
+    778,
+    614,
+    494,
+    387,
+    304
+   ],
+   [
+    209,
+    364,
+    320,
+    255,
+    248,
+    286,
+    349,
+    467,
+    509,
+    605,
+    765,
+    728,
+    537,
+    457,
+    476,
+    543,
+    664,
+    673,
+    726,
+    774,
+    736,
+    573,
+    459,
+    405
+   ],
+   [
+    251,
+    513,
+    480,
+    408,
+    314,
+    315,
+    316,
+    400,
+    534,
+    584,
+    774,
+    835,
+    640,
+    577,
+    583,
+    590,
+    679,
+    622,
+    745,
+    831,
+    797,
+    663,
+    602,
+    559
+   ],
+   [
+    291,
+    568,
+    580,
+    527,
+    368,
+    291,
+    266,
+    288,
+    352,
+    355,
+    466,
+    480,
+    277,
+    345,
+    412,
+    402,
+    445,
+    412,
+    459,
+    507,
+    497,
+    450,
+    390,
+    308
+   ]
+  ],
+  "por_anio": {
+   "2016": {
+    "accidente": 0,
+    "hurto": 4136,
+    "violencia": 1758
+   },
+   "2017": {
+    "accidente": 0,
+    "hurto": 4295,
+    "violencia": 1658
+   },
+   "2018": {
+    "accidente": 0,
+    "hurto": 5237,
+    "violencia": 1716
+   },
+   "2019": {
+    "accidente": 0,
+    "hurto": 6414,
+    "violencia": 1505
+   },
+   "2020": {
+    "accidente": 0,
+    "hurto": 4578,
+    "violencia": 1216
+   },
+   "2021": {
+    "accidente": 693,
+    "hurto": 6305,
+    "violencia": 1615
+   },
+   "2022": {
+    "accidente": 685,
+    "hurto": 7597,
+    "violencia": 1492
+   },
+   "2023": {
+    "accidente": 699,
+    "hurto": 9235,
+    "violencia": 1258
+   },
+   "2024": {
+    "accidente": 70,
+    "hurto": 7223,
+    "violencia": 1239
+   },
+   "2025": {
+    "accidente": 50,
+    "hurto": 5742,
+    "violencia": 1167
+   },
+   "2026": {
+    "accidente": 2,
+    "hurto": 2392,
+    "violencia": 490
+   }
+  },
+  "tipo_hora": {
+   "accidente": {
+    "0": 37,
+    "1": 42,
+    "2": 36,
+    "3": 28,
+    "4": 27,
+    "5": 70,
+    "6": 92,
+    "7": 122,
+    "8": 113,
+    "9": 92,
+    "10": 126,
+    "11": 119,
+    "12": 85,
+    "13": 89,
+    "14": 109,
+    "15": 107,
+    "16": 114,
+    "17": 121,
+    "18": 129,
+    "19": 149,
+    "20": 115,
+    "21": 77,
+    "22": 62,
+    "23": 65
+   },
+   "hurto": {
+    "0": 960,
+    "1": 1970,
+    "2": 1933,
+    "3": 1639,
+    "4": 1479,
+    "5": 1705,
+    "6": 1870,
+    "7": 2494,
+    "8": 2873,
+    "9": 3117,
+    "10": 3888,
+    "11": 3929,
+    "12": 2849,
+    "13": 2646,
+    "14": 2658,
+    "15": 2881,
+    "16": 3171,
+    "17": 3079,
+    "18": 3837,
+    "19": 4021,
+    "20": 3383,
+    "21": 2578,
+    "22": 1940,
+    "23": 1588
+   },
+   "violencia": {
+    "0": 502,
+    "1": 470,
+    "2": 389,
+    "3": 363,
+    "4": 231,
+    "5": 198,
+    "6": 250,
+    "7": 401,
+    "8": 581,
+    "9": 600,
+    "10": 827,
+    "11": 732,
+    "12": 452,
+    "13": 588,
+    "14": 667,
+    "15": 707,
+    "16": 778,
+    "17": 841,
+    "18": 829,
+    "19": 968,
+    "20": 1105,
+    "21": 925,
+    "22": 805,
+    "23": 652
+   }
+  },
+  "por_comuna": {
+   "1": 5766,
+   "2": 2352,
+   "3": 10543,
+   "4": 4720,
+   "5": 3014,
+   "6": 5612,
+   "7": 2105,
+   "8": 1441,
+   "9": 1576,
+   "10": 4103,
+   "11": 2021,
+   "12": 10705,
+   "13": 11709,
+   "14": 1542,
+   "15": 9584,
+   "16": 1743,
+   "17": 1931
+  },
+  "sitios": {
+   "Vias Publicas": 54930,
+   "Frente A Residencias - Via Publica": 1923,
+   "Carretera": 1889,
+   "Interior Vehiculo Servicio Publico": 1268,
+   "Interior Vehiculo Particular": 1064,
+   "Local Comercial": 961,
+   "Parques": 903,
+   "Callejón": 876
+  },
+  "movil": {
+   "A Pie": 43063,
+   "No Disponible": 9239,
+   "Conductor Motocicleta": 3372,
+   "Conductor Vehiculo": 2782,
+   "Pasajero Bus": 1869,
+   "Pasajero Motocicleta": 703
+  },
+  "lluvia": {
+   "false": {
+    "0": 10.19,
+    "1": 9.31,
+    "2": 13.92,
+    "3": 20.94,
+    "4": 15.67,
+    "5": 18.31,
+    "6": 23.06,
+    "7": 13.69
+   },
+   "true": {
+    "0": 9.08,
+    "1": 7.7,
+    "2": 11.77,
+    "3": 19.2,
+    "4": 15.41,
+    "5": 17.93,
+    "6": 21.87,
+    "7": 12.98
+   }
+  },
+  "lluvia_tipo": {
+   "accidente": {
+    "false": 72.32,
+    "true": 64.81
+   },
+   "hurto": {
+    "false": 2071.78,
+    "true": 1985.67
+   },
+   "violencia": {
+    "false": 455.08,
+    "true": 528.58
+   }
+  },
+  "calientes": {
+   "1-0": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "1-1": [
+    "Cafe Madrid",
+    "Colorados",
+    "Kennedy"
+   ],
+   "1-2": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "1-3": [
+    "Cafe Madrid",
+    "Villa Rosa",
+    "Kennedy"
+   ],
+   "1-4": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "1-5": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "1-6": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "1-7": [
+    "Cafe Madrid",
+    "Kennedy",
+    "Colorados"
+   ],
+   "2-0": [
+    "Villa Mercedes",
+    "La Independencia",
+    "La Juventud"
+   ],
+   "2-1": [
+    "Esperanza Ii",
+    "Regadero Norte",
+    "La Independencia"
+   ],
+   "2-2": [
+    "Transicion",
+    "Regadero Norte",
+    "Villa Mercedes"
+   ],
+   "2-3": [
+    "Transicion",
+    "Regadero Norte",
+    "La Juventud"
+   ],
+   "2-4": [
+    "Villa Mercedes",
+    "La Juventud",
+    "Transicion"
+   ],
+   "2-5": [
+    "Regadero Norte",
+    "Transicion",
+    "Villa Mercedes"
+   ],
+   "2-6": [
+    "Villa Mercedes",
+    "Transicion",
+    "Regadero Norte"
+   ],
+   "2-7": [
+    "Villa Mercedes",
+    "Esperanza Ii",
+    "Regadero Norte"
+   ],
+   "3-0": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-1": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-2": [
+    "San Francisco",
+    "Universidad",
+    "Alarcon"
+   ],
+   "3-3": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-4": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-5": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-6": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "3-7": [
+    "San Francisco",
+    "Universidad",
+    "Comuneros"
+   ],
+   "4-0": [
+    "Girardot",
+    "Gaitan",
+    "Rio de Oro I"
+   ],
+   "4-1": [
+    "Girardot",
+    "Rio de Oro I",
+    "Gaitan"
+   ],
+   "4-2": [
+    "Girardot",
+    "Rio de Oro I",
+    "Gaitan"
+   ],
+   "4-3": [
+    "Girardot",
+    "Gaitan",
+    "Granada"
+   ],
+   "4-4": [
+    "Girardot",
+    "Gaitan",
+    "Granada"
+   ],
+   "4-5": [
+    "Girardot",
+    "Granada",
+    "Gaitan"
+   ],
+   "4-6": [
+    "Girardot",
+    "Granada",
+    "Gaitan"
+   ],
+   "4-7": [
+    "Girardot",
+    "Rio de Oro I",
+    "Gaitan"
+   ],
+   "5-0": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-1": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-2": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-3": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-4": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-5": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "Chorreras de Don Juan"
+   ],
+   "5-6": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "5-7": [
+    "Campo Hermoso",
+    "Alfonso Lopez",
+    "La Joya"
+   ],
+   "6-0": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "6-1": [
+    "La Concordia",
+    "Ricaurte",
+    "La Ceiba"
+   ],
+   "6-2": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "6-3": [
+    "La Concordia",
+    "Ricaurte",
+    "La Ceiba"
+   ],
+   "6-4": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "6-5": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "6-6": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "6-7": [
+    "La Concordia",
+    "Ricaurte",
+    "La Victoria"
+   ],
+   "7-0": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-1": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-2": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-3": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-4": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-5": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-6": [
+    "Ciudadela Real de Minas"
+   ],
+   "7-7": [
+    "Ciudadela Real de Minas"
+   ],
+   "8-0": [
+    "Pablo Vi",
+    "San Gerardo",
+    "Juan Xxiii"
+   ],
+   "8-1": [
+    "Canelos",
+    "San Gerardo",
+    "Africa"
+   ],
+   "8-2": [
+    "San Gerardo",
+    "Canelos",
+    "Juan Xxiii"
+   ],
+   "8-3": [
+    "Canelos",
+    "San Gerardo",
+    "Pablo Vi"
+   ],
+   "8-4": [
+    "San Gerardo",
+    "Bosconia",
+    "Canelos"
+   ],
+   "8-5": [
+    "Canelos",
+    "San Gerardo",
+    "Bosconia"
+   ],
+   "8-6": [
+    "San Gerardo",
+    "Canelos",
+    "Pablo Vi"
+   ],
+   "8-7": [
+    "San Gerardo",
+    "Pablo Vi",
+    "Canelos"
+   ],
+   "9-0": [
+    "San Martin",
+    "Asturias",
+    "Diamante I"
+   ],
+   "9-1": [
+    "Diamante I",
+    "San Martin",
+    "La Pedregosa"
+   ],
+   "9-2": [
+    "San Martin",
+    "La Pedregosa",
+    "Asturias"
+   ],
+   "9-3": [
+    "La Pedregosa",
+    "Diamante I",
+    "Asturias"
+   ],
+   "9-4": [
+    "La Pedregosa",
+    "San Martin",
+    "Asturias"
+   ],
+   "9-5": [
+    "La Pedregosa",
+    "San Martin",
+    "Asturias"
+   ],
+   "9-6": [
+    "San Martin",
+    "La Pedregosa",
+    "Diamante I"
+   ],
+   "9-7": [
+    "San Martin",
+    "Asturias",
+    "La Pedregosa"
+   ],
+   "10-0": [
+    "Provenza",
+    "Diamante Ii",
+    "El Cristal"
+   ],
+   "10-1": [
+    "Provenza",
+    "Diamante Ii",
+    "Fontana"
+   ],
+   "10-2": [
+    "Provenza",
+    "Diamante Ii",
+    "El Porvenir"
+   ],
+   "10-3": [
+    "Provenza",
+    "Diamante Ii",
+    "El Porvenir"
+   ],
+   "10-4": [
+    "Provenza",
+    "Diamante Ii",
+    "Fontana"
+   ],
+   "10-5": [
+    "Provenza",
+    "Diamante Ii",
+    "Fontana"
+   ],
+   "10-6": [
+    "Provenza",
+    "Diamante Ii",
+    "Fontana"
+   ],
+   "10-7": [
+    "Provenza",
+    "Diamante Ii",
+    "Fontana"
+   ],
+   "11-0": [
+    "Terminal de Transportes",
+    "Dangond",
+    "Manuela Beltran"
+   ],
+   "11-1": [
+    "Terminal de Transportes",
+    "Manuela Beltran",
+    "El Rocio"
+   ],
+   "11-2": [
+    "Terminal de Transportes",
+    "El Rocio",
+    "Dangond"
+   ],
+   "11-3": [
+    "Dangond",
+    "El Rocio",
+    "Manuela Beltran"
+   ],
+   "11-4": [
+    "El Rocio",
+    "Jardines de Coaviconsa",
+    "Delicias"
+   ],
+   "11-5": [
+    "Terminal de Transportes",
+    "Dangond",
+    "Jardines de Coaviconsa"
+   ],
+   "11-6": [
+    "El Rocio",
+    "Jardines de Coaviconsa",
+    "Terminal de Transportes"
+   ],
+   "11-7": [
+    "El Rocio",
+    "Terminal de Transportes",
+    "Dangond"
+   ],
+   "12-0": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-1": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-2": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-3": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-4": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Bolarqui"
+   ],
+   "12-5": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-6": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "12-7": [
+    "Cabecera del Llano",
+    "Sotomayor",
+    "Nuevo Sotomayor"
+   ],
+   "13-0": [
+    "San Alonso",
+    "Mejoras Publicas",
+    "Antonia Santos Centro"
+   ],
+   "13-1": [
+    "San Alonso",
+    "Mejoras Publicas",
+    "Antonia Santos Centro"
+   ],
+   "13-2": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "La Aurora"
+   ],
+   "13-3": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "La Aurora"
+   ],
+   "13-4": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "Mejoras Publicas"
+   ],
+   "13-5": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "Mejoras Publicas"
+   ],
+   "13-6": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "Mejoras Publicas"
+   ],
+   "13-7": [
+    "San Alonso",
+    "Antonia Santos Centro",
+    "La Aurora"
+   ],
+   "14-0": [
+    "Morrorico",
+    "Buenos Aires",
+    "Albania"
+   ],
+   "14-1": [
+    "Morrorico",
+    "Miraflores",
+    "Buenos Aires"
+   ],
+   "14-2": [
+    "Morrorico",
+    "Buenos Aires",
+    "Miraflores"
+   ],
+   "14-3": [
+    "Morrorico",
+    "Buenos Aires",
+    "Miraflores"
+   ],
+   "14-4": [
+    "Morrorico",
+    "Buenos Aires",
+    "Albania"
+   ],
+   "14-5": [
+    "Morrorico",
+    "Buenos Aires",
+    "Miraflores"
+   ],
+   "14-6": [
+    "Morrorico",
+    "Buenos Aires",
+    "Miraflores"
+   ],
+   "14-7": [
+    "Morrorico",
+    "Buenos Aires",
+    "Miraflores"
+   ],
+   "15-0": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-1": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-2": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-3": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-4": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-5": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-6": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "15-7": [
+    "Centro",
+    "Garcia Rovira"
+   ],
+   "16-0": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-1": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-2": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-3": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-4": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-5": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-6": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "16-7": [
+    "El Tejar",
+    "Lagos del Cacique",
+    "Altos del Cacique"
+   ],
+   "17-0": [
+    "Mutis",
+    "Monterredondo",
+    "Estoraques"
+   ],
+   "17-1": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ],
+   "17-2": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ],
+   "17-3": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ],
+   "17-4": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ],
+   "17-5": [
+    "Mutis",
+    "Estoraques",
+    "La Gran Ladera"
+   ],
+   "17-6": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ],
+   "17-7": [
+    "Mutis",
+    "Estoraques",
+    "Monterredondo"
+   ]
+  }
+ }
+}
