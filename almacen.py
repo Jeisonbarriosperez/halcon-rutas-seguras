@@ -1,7 +1,10 @@
 """
-Dónde se guardan los reportes de la comunidad y las rutas consultadas.
-Si hay conexión con Azure SQL se usa Azure; si no, un CSV en la carpeta datos/ (la app nunca se cae).
+Dónde se guardan los reportes de la comunidad y las rutas consultadas: en Azure SQL.
+Si Azure no responde (por ejemplo, mientras la base despierta), se guarda en datos/ para no perder el
+reporte, se deja el motivo en el registro y se vuelve a intentar Azure al minuto.
 """
+import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -15,7 +18,13 @@ COLS_REPORTES = ['fecha', 'zona', 'tipo', 'comentario']
 COLS_CONSULTAS = ['fecha', 'origen', 'destino', 'modo', 'hora_salida', 'clima', 'riesgo_habitual',
                   'riesgo_sugerida', 'hubo_desvio', 'minutos_extra']
 
-_estado = {'azure': None}
+REINTENTAR_CADA = 60          # segundos entre intentos cuando Azure no respondió
+_estado = {'azure': None, 'revisado': 0.0}
+
+
+def _registrar(texto):
+    """Deja el motivo en el registro (en Streamlit Cloud: Manage app > logs)."""
+    print(f'[Halcón · Azure SQL] {texto}', file=sys.stderr, flush=True)
 
 
 def _conectar():
@@ -23,18 +32,28 @@ def _conectar():
     return conectar()
 
 
+def _marcar_caida(error):
+    _estado['azure'], _estado['revisado'] = False, time.time()
+    _registrar(f'sin conexión: {error!r}'[:400])
+
+
 def azure_disponible():
-    """Se revisa una sola vez: si las tablas de Halcón existen en Azure, se trabaja allá."""
-    if _estado['azure'] is None:
-        try:
-            conn = _conectar()
-            cursor = conn.cursor()
-            cursor.execute('SELECT TOP 1 id FROM reportes_ciudadanos')
-            cursor.fetchall()
-            conn.close()
-            _estado['azure'] = True
-        except Exception:
-            _estado['azure'] = False
+    """Si la última revisión falló, vuelve a intentar pasado un minuto (nunca se rinde para siempre)."""
+    if _estado['azure'] is True:
+        return True
+    if _estado['azure'] is False and time.time() - _estado['revisado'] < REINTENTAR_CADA:
+        return False
+    try:
+        conn = _conectar()
+        cursor = conn.cursor()
+        cursor.execute('SELECT TOP 1 id FROM reportes_ciudadanos')
+        cursor.fetchall()
+        conn.close()
+        if _estado['azure'] is not True:
+            _registrar('conectado')
+        _estado['azure'] = True
+    except Exception as error:
+        _marcar_caida(error)
     return _estado['azure']
 
 
@@ -58,10 +77,10 @@ def _guardar(tabla, archivo, columnas, valores):
         try:
             _insertar(tabla, columnas, valores)
             return 'Azure SQL'
-        except Exception:
-            pass
+        except Exception as error:
+            _marcar_caida(error)
     _agregar_csv(archivo, columnas, valores)
-    return 'archivo local'
+    return 'respaldo'
 
 
 def _leer(tabla, archivo, columnas, desde):
@@ -74,8 +93,8 @@ def _leer(tabla, archivo, columnas, desde):
             datos = pd.DataFrame(cursor.fetchall(), columns=columnas)
             conn.close()
             return datos
-        except Exception:
-            pass
+        except Exception as error:
+            _marcar_caida(error)
     if not archivo.exists():
         return pd.DataFrame(columns=columnas)
     datos = pd.read_csv(archivo, parse_dates=['fecha'])
