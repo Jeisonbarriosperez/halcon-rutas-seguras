@@ -43,8 +43,12 @@ El modelo ya entrenado viene en la carpeta `modelo/`, así que la app funciona c
 
 ### Publicarla en Streamlit Cloud
 
-Sube el repositorio, crea la app apuntando a `app.py` y, en **Settings > Secrets**, pega el contenido de tu
-`.streamlit/secrets.toml`.
+1. En share.streamlit.io crea la app con este repositorio, rama `main` y archivo `app.py`.
+2. En **Advanced settings** elige **Python 3.12** (las versiones de `requirements.txt` están probadas con esa).
+3. En **Secrets** pega el contenido de tu `.streamlit/secrets.toml`.
+4. En Azure, en las reglas de red del servidor SQL, permite la conexión desde Streamlit Cloud.
+
+`packages.txt` instala las fuentes que usa la tarjeta para compartir.
 
 ## La app
 

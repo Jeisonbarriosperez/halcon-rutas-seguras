@@ -1,11 +1,15 @@
-pandas
-numpy
-scikit-learn
-joblib
-python-tds
-certifi
-pyopenssl
-streamlit>=1.46
-plotly>=5.24
-pillow
-requests
+# Versiones fijas: el modelo (modelo/modelo_halcon.joblib) se entrenó con estas.
+# Cambiar scikit-learn obliga a reentrenar con 3_entrenar_modelo.py.
+pandas==3.1.1
+numpy==2.5.5
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+python-tds==1.17.1
+certifi==2026.10.23
+pyopenssl==26.4.0
+streamlit==1.67.0
+plotly==7.1.0
+pillow==13.0.0
+requests==2.34.2
+tzdata==2026.6
